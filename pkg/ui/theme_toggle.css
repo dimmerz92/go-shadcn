@@ -1,0 +1,27 @@
+#theme-toggle {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	border: none;
+	background: none;
+	color: hsl(var(--foreground));
+	cursor: pointer;
+	display: inline-block;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	width: min-content;
+}
+
+#theme-toggle :where(.dark, .light) {
+	display: inline-block;
+	line-height: 1;
+}
+
+#theme-toggle[data-theme=dark] > .dark {
+	display: none;
+}
+
+#theme-toggle[data-theme=light] > .light {
+	display: none;
+}

@@ -62,7 +62,7 @@ More details, documentation, and usage information will be added to the README a
 - [ ] Table
 - [ ] Tabs
 - [ ] Textarea
-- [ ] Theme Toggle
+- [X] [Theme Toggle](/pkg/ui/theme_toggle.templ)
 - [ ] Toast
 - [ ] Toggle
 - [ ] Toggle Group

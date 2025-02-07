@@ -1,0 +1,82 @@
+package ui
+
+import "github.com/dimmerz92/go-templ-lucide/icons"
+
+type ThemeToggleProps struct {
+	IconLight templ.Component
+	IconDark  templ.Component
+}
+
+// ThemeToggle renders a clickable theme toggling button to switch between light and dark themes.
+// Best used along with the @DetectTheme script placed in the <head> of your document.
+// If `nil` is passed instead of `ThemeToggleProps` the default Sun and Moon Lucide icons will be used, otherwise, the
+// icons specified will be used.
+templ ThemeToggle(props *ThemeToggleProps) {
+	<button
+		id="theme-toggle"
+		data-theme="light"
+		aria-label="click to change to dark theme"
+	>
+		<span class="light">
+			if props == nil || props.IconLight == nil {
+				@icons.Sun()
+			} else {
+				@props.IconLight
+			}
+		</span>
+		<span class="dark">
+			if props == nil || props.IconDark == nil {
+				@icons.Moon()
+			} else {
+				@props.IconDark
+			}
+		</span>
+	</button>
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		document.querySelector("#theme-toggle").addEventListener("click", function() {
+			// check the current theme
+			const theme = this.getAttribute("data-theme") === "dark" ? "light" : "dark";
+
+			// toggle the dark class on the <html> tag
+			document.documentElement.classList.toggle("dark");
+
+			// update the theme on the toggle
+			this.setAttribute("data-theme", theme);
+			this.ariaPressed = theme === "dark";
+
+			// cache the theme in local storage
+			localStorage.setItem("theme", theme);
+		});
+	</script>
+}
+
+// DetectTheme checks for a cached theme or system preference and applies the
+// styles. Place this script in the <head> of your document, use in conjunction
+// with the ThemeToggle component.
+templ DetectTheme() {
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		// check for a cached theme or system theme preference
+		const preference = window.matchMedia("(prefers-color-scheme: dark)")
+		const theme = localStorage.getItem("theme") ?? preference.matches ? "dark" : "light";
+
+		// apply color theme
+		document.documentElement.classList.toggle("dark", theme === "dark");
+
+		// update the toggle if present
+		document.addEventListener("DOMContentLoaded", () => {
+			const toggle = document.querySelector("#theme-toggle");
+			if (toggle) {
+				toggle.setAttribute("data-theme", theme);
+				toggle.ariaPressed = theme === "dark";
+			}
+		}, { once: true });
+	</script>
+}
