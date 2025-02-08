@@ -1,0 +1,46 @@
+.alert {
+	display: grid;
+	column-gap: 0.5rem;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		"alert-icon alert-header"
+		". alert-content";
+	background-color: hsl(var(--background));
+	border: 1px solid var(--alert-color, hsl(var(--border)));
+	border-radius: var(--radius);
+	color: var(--alert-color, hsl(var(--foreground)));
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	box-sizing: border-box;
+	padding: 0.75rem 1rem;
+	width: 100%;
+}
+
+.alert-icon {
+	grid-area: alert-icon;
+	display: block;
+	height: 1rem;
+	width: 1rem;
+}
+
+.alert-icon > * {
+	height: 100%;
+	width: 100%;
+}
+
+.alert-header {
+	grid-area: alert-header;
+	font-size: inherit;
+	font-weight: 500;
+	line-height: 1;
+	margin: 0;
+	margin-bottom: 0.25rem;
+}
+
+.alert-content {
+	grid-area: alert-content;
+}
+
+.alert.destructive {
+	--alert-color: hsl(var(--destructive));
+}

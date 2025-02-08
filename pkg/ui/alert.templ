@@ -1,0 +1,37 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-templ-lucide/icons"
+
+type AlertProps struct {
+	ID               string          // specifies the id attribute.
+	Class            string          // adds classes.
+	Header           string          // alert header text.
+	Icon             templ.Component // defaults to `icons.Info`.
+	templ.Attributes                 // adds additional attributes.
+}
+
+// Alert displays a callout for user attention. To alter the colors, supply
+// class(es) that alter the --alert-color css variable or tailwind classes.
+templ Alert(props AlertProps) {
+	<div
+		role="alert"
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("alert " + props.Class) }
+		{ props.Attributes... }
+	>
+		<span class="alert-icon">
+			if props.Icon != nil {
+				@props.Icon
+			} else {
+				@icons.Info()
+			}
+		</span>
+		<h5 class="alert-header">{ props.Header }</h5>
+		<div class="alert-content">
+			{ children... }
+		</div>
+	</div>
+}

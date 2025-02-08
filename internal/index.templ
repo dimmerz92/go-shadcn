@@ -1,6 +1,7 @@
 package internal
 
 import "github.com/dimmerz92/go-shadcn/pkg/ui"
+import "github.com/dimmerz92/go-templ-lucide/icons"
 
 templ Index() {
 	<!DOCTYPE html>
@@ -15,31 +16,11 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Accordion(ui.AccordionProps{Animate: true}) {
-				@ui.AccordionItem(ui.AccordionItemProps{}) {
-					@ui.AccordionTrigger(ui.AccordionTriggerProps{}) {
-						Is it accessible?
-					}
-					@ui.AccordionContent(ui.AccordionContentProps{}) {
-						Yes. It adheres to the WAI-ARIA design pattern.
-					}
-				}
-				@ui.AccordionItem(ui.AccordionItemProps{}) {
-					@ui.AccordionTrigger(ui.AccordionTriggerProps{}) {
-						Is it styled?
-					}
-					@ui.AccordionContent(ui.AccordionContentProps{}) {
-						Yes. It comes with default styles that matches the other components' aesthetic.
-					}
-				}
-				@ui.AccordionItem(ui.AccordionItemProps{}) {
-					@ui.AccordionTrigger(ui.AccordionTriggerProps{}) {
-						Is it animated?
-					}
-					@ui.AccordionContent(ui.AccordionContentProps{}) {
-						Yes. It's animated by default, but you can disable it if you prefer.
-					}
-				}
+			@ui.Alert(ui.AlertProps{Header: "Heads up!"}) {
+				You can add components to your app using the cli.
+			}
+			@ui.Alert(ui.AlertProps{Header: "Error", Class: "destructive", Icon: icons.CircleAlert()}) {
+				Your session has expired. Please log in again.
 			}
 		</body>
 	</html>

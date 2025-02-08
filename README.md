@@ -19,7 +19,7 @@ More details, documentation, and usage information will be added to the README a
 ## Components
 
 - [X] Accordion
-- [ ] Alert
+- [X] Alert
 - [ ] Alert Dialog
 - [ ] Avatar
 - [ ] Badge
