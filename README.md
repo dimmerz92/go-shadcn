@@ -21,7 +21,7 @@ More details, documentation, and usage information will be added to the README a
 - [X] [Accordion](/pkg/ui/accordion.templ)
 - [X] [Alert](/pkg/ui/alert.templ)
 - [X] [Alert Dialog](/pkg/ui/alert_dialog.templ)
-- [ ] Avatar
+- [X] [Avatar](/pkg/ui/avatar.templ)
 - [ ] Badge
 - [ ] Breadcrumb
 - [X] [Button](/pkg/ui/button.templ)

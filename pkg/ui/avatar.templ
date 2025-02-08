@@ -1,0 +1,37 @@
+package ui
+
+import "strings"
+
+type AvatarProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Src              string // URI for the image.
+	Alt              string // image alt text.
+	Fallback         string // fallback text if the image fails to load, fits 3 characters.
+	templ.Attributes        // adds additional attributes.
+}
+
+// Avatar displays a small circular image.
+templ Avatar(props AvatarProps) {
+	<span
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("avatar " + props.Class) }
+		data-fallback={ props.Fallback }
+	>
+		<img src={ props.Src } alt={ props.Alt }/>
+		<script
+			if nonce := templ.GetNonce(ctx); nonce != "" {
+				nonce={ nonce }
+			}
+		>
+			((container) => {
+				container.querySelector("img").addEventListener("error", () => {
+					container.innerHTML = "";
+					container.textContent = `${container.getAttribute("data-fallback")}`;
+				})
+			})(document.currentScript.closest(".avatar"));
+		</script>
+	</span>
+}

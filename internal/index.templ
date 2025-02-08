@@ -15,25 +15,8 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.AlertDialogTrigger(ui.AlertDialogTriggerProps{Triggers: "1"}) {
-				Trigger
-			}
-			@ui.AlertDialog(ui.AlertDialogProps{ID: "1"}) {
-				@ui.AlertDialogHeader(ui.AlertDialogHeaderProps{}) {
-					Are you absolutely sure?
-				}
-				@ui.AlertDialogContent(ui.AlertDialogFooterProps{}) {
-					This action cannot be undone. This will permanently delete your account and remove your data from our servers.
-				}
-				@ui.AlertDialogFooter(ui.AlertDialogFooterProps{}) {
-					@ui.AlertDialogAction(ui.AlertDialogActionProps{Cancel: true}) {
-						Cancel
-					}
-					@ui.AlertDialogAction(ui.AlertDialogActionProps{}) {
-						Continue
-					}
-				}
-			}
+			@ui.Avatar(ui.AvatarProps{Src: "https://github.com/shadcn.png", Alt: "@user", Fallback: "AW"})
+			@ui.Avatar(ui.AvatarProps{Src: "https://github.com/shadcn.pn", Alt: "@user", Fallback: "AJW"})
 		</body>
 	</html>
 }

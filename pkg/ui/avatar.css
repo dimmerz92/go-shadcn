@@ -1,0 +1,16 @@
+.avatar {
+	display: inline-grid;
+	justify-items: center;
+	align-items: center;
+	background-color: hsl(var(--secondary));
+	border-radius: calc(infinity * 1px);
+	height: 2.5rem;
+	width: 2.5rem;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.avatar > img {
+	height: 100%;
+	width: 100%;
+}
