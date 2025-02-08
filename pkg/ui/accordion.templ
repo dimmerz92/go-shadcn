@@ -1,0 +1,154 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-shadcn/pkg/lib"
+
+/* Accordion------------------------------------------------------------------*/
+type AccordionProps struct {
+	ID               string // specifies the <section> id attribute.
+	Class            string // adds classes to the <section>.
+	Animate          bool   // turns accordion animations on, defaults to off.
+	templ.Attributes        // adds additional attributes to the <section>.
+}
+
+// Accordion provides a parent context for all accordion items to be placed.
+templ Accordion(props AccordionProps) {
+	if props.Animate {
+		@accordionToggler.Once() {
+			@toggleAccordion()
+		}
+	}
+	<section
+		role="group"
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace(
+			"accordion " +
+			lib.IIF(props.Animate, "animate ", "") +
+			props.Class) }
+		data-ctx={ lib.GenerateUniqueString(8) }
+	>
+		{ children... }
+	</section>
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		// add context to all accordion items and apply animation event
+		// listeners to browsers that don't support interpolate-size if
+		// animation is allowed
+		((accordion) => {
+			const context = accordion.getAttribute("data-ctx");
+
+			// puts all accordions within the section in the same context
+			for (let child of accordion.children) {
+				if (child.nodeName === "DETAILS") {
+					child.setAttribute("name", context);
+				}
+
+				// applies animation event listeners if animation is allowed
+				if (accordion.classList.contains("animate") &&
+					!CSS.supports("interpolate-size", "allow-keywords")
+				) {
+					child.addEventListener("click", toggleAccordion);
+				}
+			}
+		})(document.currentScript.previousElementSibling);
+	</script>
+}
+
+// ensures the toggleAccordion function script is only rendered once.
+var accordionToggler = templ.NewOnceHandle()
+
+// toggles the clicked accordion item.
+templ toggleAccordion() {
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		function toggleAccordion(event) {
+			const trigger = event.target;
+			const item = trigger.closest("details");
+			const content = trigger.nextElementSibling;
+
+			// close all other accordions if open
+			for (let child of trigger.closest(".accordion").children) {
+				if (child.nodeName === "DETAILS" && child !== item && child.open) {
+					child.querySelector(".accordion-trigger").click();
+				}
+			}
+
+			if (!item.open) {
+				setTimeout(() => {
+					item.style.height = `${trigger.offsetHeight}px`;
+					item.style.height = `${trigger.offsetHeight + content.offsetHeight}px`;
+				}, 1);
+			} else {
+				item.style.height = `${trigger.offsetHeight}px`;
+			}
+		}
+	</script>
+}
+
+/* Accordion Item-------------------------------------------------------------*/
+type AccordionItemProps struct {
+	ID               string // specifies the <details> id attribute.
+	Class            string // adds classes to the <details>.
+	templ.Attributes        // adds additional attributes to the <details>.
+}
+
+// AccordionItem displays a single togglable accordion item.
+templ AccordionItem(props AccordionItemProps) {
+	<details
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("accordion-item " + props.Class) }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</details>
+}
+
+/* Accordion Trigger----------------------------------------------------------*/
+type AccordionTriggerProps struct {
+	ID               string // specifies the <details> id attribute.
+	Class            string // adds classes to the <details>.
+	templ.Attributes        // adds additional attributes to the <details>.
+}
+
+// AccordionTrigger displays the trigger to open and close the accordion item.
+templ AccordionTrigger(props AccordionTriggerProps) {
+	<summary
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("accordion-trigger " + props.Class) }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</summary>
+}
+
+/* Accordion Content----------------------------------------------------------*/
+type AccordionContentProps struct {
+	ID               string // specifies the <details> id attribute.
+	Class            string // adds classes to the <details>.
+	templ.Attributes        // adds additional attributes to the <details>.
+}
+
+// AccordionContent displays the toggled content of the accordion item.
+templ AccordionContent(props AccordionContentProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("accordion-content " + props.Class) }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</div>
+}

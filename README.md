@@ -18,7 +18,7 @@ More details, documentation, and usage information will be added to the README a
 
 ## Components
 
-- [ ] Accordion
+- [X] Accordion
 - [ ] Alert
 - [ ] Alert Dialog
 - [ ] Avatar
