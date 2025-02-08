@@ -5,7 +5,7 @@
 	gap: 0.5rem;
 	background-color: var(--button-color, hsl(var(--primary)));
 	border: 1px solid var(--button-color, transparent);
-	border-radius: var(--radius);
+	border-radius: calc(var(--radius) - 2px);
 	box-shadow:
 		0 0 #0000,
 		0 1px 3px 0 rgba(0, 0, 0, 0.1),
@@ -47,6 +47,11 @@
 .button.secondary {
 	--button-color: hsl(var(--secondary));
 	--button-color-foreground: hsl(var(--secondary-foreground));
+}
+
+:not(.dark).button.outline.secondary,
+:not(.dark) .button.outline.secondary {
+	border-color: hsl(var(--input));
 }
 
 .button.destructive {
