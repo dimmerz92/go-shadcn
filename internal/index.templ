@@ -15,44 +15,24 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Button(ui.ButtonProps{}) {
-				Button
+			@ui.AlertDialogTrigger(ui.AlertDialogTriggerProps{Triggers: "1"}) {
+				Trigger
 			}
-			@ui.Button(ui.ButtonProps{Class: "secondary"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "destructive"}) {
-				Button
-			}
-			<br/>
-			@ui.Button(ui.ButtonProps{Class: "outline"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "outline secondary"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "outline destructive"}) {
-				Button
-			}
-			<br/>
-			@ui.Button(ui.ButtonProps{Class: "ghost"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "ghost secondary"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "ghost destructive"}) {
-				Button
-			}
-			<br/>
-			@ui.Button(ui.ButtonProps{Class: "link"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "link secondary"}) {
-				Button
-			}
-			@ui.Button(ui.ButtonProps{Class: "link destructive"}) {
-				Button
+			@ui.AlertDialog(ui.AlertDialogProps{ID: "1"}) {
+				@ui.AlertDialogHeader(ui.AlertDialogHeaderProps{}) {
+					Are you absolutely sure?
+				}
+				@ui.AlertDialogContent(ui.AlertDialogFooterProps{}) {
+					This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+				}
+				@ui.AlertDialogFooter(ui.AlertDialogFooterProps{}) {
+					@ui.AlertDialogAction(ui.AlertDialogActionProps{Cancel: true}) {
+						Cancel
+					}
+					@ui.AlertDialogAction(ui.AlertDialogActionProps{}) {
+						Continue
+					}
+				}
 			}
 		</body>
 	</html>

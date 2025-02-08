@@ -1,0 +1,75 @@
+.alert-dialog {
+	grid-auto-rows: min-content;
+	gap: 1rem;
+	background-color: hsl(var(--background));
+	border: 1px solid hsl(var(--border));
+	box-shadow:
+		0 0 #0000,
+		0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -4px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+	color: hsl(var(--foreground));
+	width: 100%;
+	max-width: 32rem;
+	padding: 1.5rem;
+	animation: exit 150ms;
+}
+
+.alert-dialog[open] {
+	display: grid;
+	animation: enter 150ms 
+}
+
+.alert-dialog:where(:focus, :focus-visible) {
+	outline: none;
+}
+
+.alert-dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.alert-dialog-header,
+.alert-dialog-header > h2 {
+	font-size: 1.125rem;
+	font-weight: 600;
+	line-height: 1.75rem;
+	margin: 0;
+}
+
+.alert-dialog-content {
+	color: hsl(var(--muted-foreground));
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+.alert-dialog-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+}
+
+@media screen and (min-width: 640px) {
+	.alert-dialog {
+		border-radius: var(--radius);
+	}
+}
+
+@media screen and (width < 640px) {
+	.alert-dialog-footer {
+		flex-direction: column-reverse;
+	}
+}
+
+@keyframes enter {
+	0% {
+		opacity: 0;
+		transform: translate3d(0,0,0) scale3d(0,0,0) rotate(0);
+	}
+}
+
+@keyframes exit {
+	100% {
+		opacity: 0;
+		transform: translate3d(0,0,0) scale3d(0,0,0) rotate(0);
+	}
+}

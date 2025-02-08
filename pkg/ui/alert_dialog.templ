@@ -1,0 +1,152 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-shadcn/pkg/lib"
+
+/* Alert Dialog---------------------------------------------------------------*/
+type AlertDialogProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// AlertDialog displays a modal dialog that interrupts the user with important
+// content and expects a response.
+templ AlertDialog(props AlertDialogProps) {
+	<dialog
+		role="alertdialog"
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("alert-dialog " + props.Class) }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</dialog>
+}
+
+/* Alert Dialog Trigger-------------------------------------------------------*/
+type AlertDialogTriggerProps struct {
+	Triggers    string // the ID attribute of the alert dialog to open.
+	ButtonProps        // properties for the button
+}
+
+// AlertDialogTrigger displays a button that triggers the opening of the alert
+// dialog when clicked. To add additional custom logic, use the event attributes
+// on the button or provide an inline script as a child of the button.
+templ AlertDialogTrigger(props AlertDialogTriggerProps) {
+	// inject the button with the dialog id to be triggered.
+	{{
+		if props.ButtonProps.Attributes != nil {
+			props.ButtonProps.Attributes["data-dialogid"] = props.Triggers
+		} else {
+			props.ButtonProps.Attributes = templ.Attributes{
+				"data-dialogid": props.Triggers,
+			}
+		}
+	}}
+	@Button(props.ButtonProps) {
+		{ children... }
+	}
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		((trigger) => {
+			trigger.addEventListener("click", function() {
+				document.getElementById(this.getAttribute("data-dialogid")).showModal();
+			});
+		})(document.currentScript.previousElementSibling);
+	</script>
+}
+
+/* Alert Dialog Header--------------------------------------------------------*/
+type AlertDialogHeaderProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// AlertDialogHeader displays the header content of the opened alert dialog.
+templ AlertDialogHeader(props AlertDialogHeaderProps) {
+	<header
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("alert-dialog-header " + props.Class) }
+	>
+		<h2>
+			{ children... }
+		</h2>
+	</header>
+}
+
+/* Alert Dialog Content-------------------------------------------------------*/
+type AlertDialogContentProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// AlertDialogContent displays the body content of the opened alert dialog.
+templ AlertDialogContent(props AlertDialogFooterProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("alert-dialog-content " + props.Class) }
+	>
+		{ children... }
+	</div>
+}
+
+/* Alert Dialog Footer--------------------------------------------------------*/
+type AlertDialogFooterProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// AlertDialogFooter displays the footer content of the opened alert dialog.
+templ AlertDialogFooter(props AlertDialogFooterProps) {
+	<footer
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("alert-dialog-footer " + props.Class) }
+	>
+		{ children... }
+	</footer>
+}
+
+/* Alert Dialog Action--------------------------------------------------------*/
+type AlertDialogActionProps struct {
+	Cancel      bool // adds alternative button style if true.
+	ButtonProps      // properties for the button.
+}
+
+// AlertDialogAction closes the alert dialog when clicked. To add additional
+// custom logic, use the event attributes on the button or provide an inline
+// script as a child of the button.
+templ AlertDialogAction(props AlertDialogActionProps) {
+	{{
+		props.ButtonProps.Class = strings.TrimSpace(
+			lib.IIF(props.Cancel, "outline secondary ", "") + props.Class,
+		)
+	}}
+	@Button(props.ButtonProps) {
+		{ children... }
+	}
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		((action) => {
+			action.addEventListener("click", function() {
+				action.closest("dialog").close();
+			});
+		})(document.currentScript.previousElementSibling);
+	</script>
+}
