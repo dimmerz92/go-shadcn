@@ -65,7 +65,7 @@ templ DetectTheme() {
 	>
 		// check for a cached theme or system theme preference
 		const preference = window.matchMedia("(prefers-color-scheme: dark)")
-		const theme = localStorage.getItem("theme") ?? preference.matches ? "dark" : "light";
+		const theme = localStorage.getItem("theme") ?? (preference.matches ? "dark" : "light");
 
 		// apply color theme
 		document.documentElement.classList.toggle("dark", theme === "dark");

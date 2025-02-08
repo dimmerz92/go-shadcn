@@ -148,7 +148,7 @@ func DetectTheme() templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, ">\n\t\t// check for a cached theme or system theme preference\n\t\tconst preference = window.matchMedia(\"(prefers-color-scheme: dark)\")\n\t\tconst theme = localStorage.getItem(\"theme\") ?? preference.matches ? \"dark\" : \"light\";\n\n\t\t// apply color theme\n\t\tdocument.documentElement.classList.toggle(\"dark\", theme === \"dark\");\n\n\t\t// update the toggle if present\n\t\tdocument.addEventListener(\"DOMContentLoaded\", () => {\n\t\t\tconst toggle = document.querySelector(\"#theme-toggle\");\n\t\t\tif (toggle) {\n\t\t\t\ttoggle.setAttribute(\"data-theme\", theme);\n\t\t\t\ttoggle.ariaPressed = theme === \"dark\";\n\t\t\t}\n\t\t}, { once: true });\n\t</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, ">\n\t\t// check for a cached theme or system theme preference\n\t\tconst preference = window.matchMedia(\"(prefers-color-scheme: dark)\")\n\t\tconst theme = localStorage.getItem(\"theme\") ?? (preference.matches ? \"dark\" : \"light\");\n\n\t\t// apply color theme\n\t\tdocument.documentElement.classList.toggle(\"dark\", theme === \"dark\");\n\n\t\t// update the toggle if present\n\t\tdocument.addEventListener(\"DOMContentLoaded\", () => {\n\t\t\tconst toggle = document.querySelector(\"#theme-toggle\");\n\t\t\tif (toggle) {\n\t\t\t\ttoggle.setAttribute(\"data-theme\", theme);\n\t\t\t\ttoggle.ariaPressed = theme === \"dark\";\n\t\t\t}\n\t\t}, { once: true });\n\t</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
