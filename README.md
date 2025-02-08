@@ -18,13 +18,13 @@ More details, documentation, and usage information will be added to the README a
 
 ## Components
 
-- [X] Accordion
-- [X] Alert
+- [X] [Accordion](/pkg/ui/accordion.templ)
+- [X] [Alert](/pkg/ui/alert.templ)
 - [ ] Alert Dialog
 - [ ] Avatar
 - [ ] Badge
 - [ ] Breadcrumb
-- [ ] Button
+- [X] [Button](/pkg/ui/button.templ)
 - [ ] Calendar
 - [ ] Card
 - [ ] Carousel

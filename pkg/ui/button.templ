@@ -1,0 +1,27 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-shadcn/pkg/lib"
+
+type ButtonProps struct {
+	Type             string // specifies the type attribute, defaults to button.
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// Button displays a clickable button. To alter the colors, supply class(es)
+// that alter the --button-color and --button-color-foreground css variables or
+// tailwind classes.
+templ Button(props ButtonProps) {
+	<button
+		type={ lib.Coalesce(props.Type, "button") }
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("button " + props.Class) }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</button>
+}

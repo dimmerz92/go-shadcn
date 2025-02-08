@@ -1,0 +1,80 @@
+.button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: var(--button-color, hsl(var(--primary)));
+	border: 1px solid var(--button-color, transparent);
+	border-radius: var(--radius);
+	box-shadow:
+		0 0 #0000,
+		0 1px 3px 0 rgba(0, 0, 0, 0.1),
+		0 1px 2px -1px rgba(0, 0, 0, 0.1);
+	color: var(--button-color-foreground, hsl(var(--primary-foreground)));
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	white-space: nowrap;
+	height: 2.25rem;
+	padding: 0.5rem 1rem;
+	transition-duration: 150ms;
+	transition-property: color, background-color, border-color, text-decoration, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.button > :where(svg, img) {
+	flex-shrink: 0;
+	height: 1rem;
+	width: 1rem;
+}
+
+.button:hover {
+	background-color: color-mix(in hsl, var(--button-color, hsl(var(--primary))), transparent 10%);
+	border: 1px solid transparent;
+}
+
+.button:active {
+	background-color: color-mix(in hsl, var(--button-color, hsl(var(--primary))), transparent 20%);
+	border: 1px solid transparent;
+}
+
+.button.secondary {
+	--button-color: hsl(var(--secondary));
+	--button-color-foreground: hsl(var(--secondary-foreground));
+}
+
+.button.destructive {
+	--button-color: hsl(var(--destructive));
+	--button-color-foreground: hsl(var(--destructive-foreground));
+}
+
+.button:where(.outline, .ghost):not(:hover, :active) {
+	border-color: var(--button-color, hsl(var(--primary)));
+}
+
+.button:where(.outline, .ghost):not(:hover, :active) {
+	background-color: transparent;
+	--button-color-foreground: hsl(var(--primary));
+}
+
+.button.ghost:not(:hover, :active) {
+	border-color: transparent;
+	box-shadow: none;
+}
+
+.button.link {
+	background-color: transparent;
+	border-color: transparent;
+	box-shadow: none;
+	color: var(--button-color, hsl(var(--primary)));
+}
+
+.button.link:where(:hover, :active) {
+	text-decoration: underline;
+}

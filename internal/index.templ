@@ -1,7 +1,6 @@
 package internal
 
 import "github.com/dimmerz92/go-shadcn/pkg/ui"
-import "github.com/dimmerz92/go-templ-lucide/icons"
 
 templ Index() {
 	<!DOCTYPE html>
@@ -16,11 +15,44 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Alert(ui.AlertProps{Header: "Heads up!"}) {
-				You can add components to your app using the cli.
+			@ui.Button(ui.ButtonProps{}) {
+				Button
 			}
-			@ui.Alert(ui.AlertProps{Header: "Error", Class: "destructive", Icon: icons.CircleAlert()}) {
-				Your session has expired. Please log in again.
+			@ui.Button(ui.ButtonProps{Class: "secondary"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "destructive"}) {
+				Button
+			}
+			<br/>
+			@ui.Button(ui.ButtonProps{Class: "outline"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "outline secondary"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "outline destructive"}) {
+				Button
+			}
+			<br/>
+			@ui.Button(ui.ButtonProps{Class: "ghost"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "ghost secondary"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "ghost destructive"}) {
+				Button
+			}
+			<br/>
+			@ui.Button(ui.ButtonProps{Class: "link"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "link secondary"}) {
+				Button
+			}
+			@ui.Button(ui.ButtonProps{Class: "link destructive"}) {
+				Button
 			}
 		</body>
 	</html>
