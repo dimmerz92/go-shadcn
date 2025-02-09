@@ -1,0 +1,24 @@
+package ui
+
+import "strings"
+
+type BadgeProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// Badge displays a hoverable badge component. To alter the colors, supply
+// class(es) that alter the --badge-color and --badge-color-foreground css
+// variables or tailwind classes.
+templ Badge(props BadgeProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("badge " + props.Class) }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</div>
+}

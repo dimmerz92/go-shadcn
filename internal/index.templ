@@ -15,8 +15,25 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Avatar(ui.AvatarProps{Src: "https://github.com/shadcn.png", Alt: "@user", Fallback: "AW"})
-			@ui.Avatar(ui.AvatarProps{Src: "https://github.com/shadcn.pn", Alt: "@user", Fallback: "AJW"})
+			@ui.Badge(ui.BadgeProps{}) {
+				Badge
+			}
+			@ui.Badge(ui.BadgeProps{Class: "secondary"}) {
+				Badge
+			}
+			@ui.Badge(ui.BadgeProps{Class: "destructive"}) {
+				Badge
+			}
+			<br/>
+			@ui.Badge(ui.BadgeProps{Class: "outline"}) {
+				Badge
+			}
+			@ui.Badge(ui.BadgeProps{Class: "outline secondary"}) {
+				Badge
+			}
+			@ui.Badge(ui.BadgeProps{Class: "outline destructive"}) {
+				Badge
+			}
 		</body>
 	</html>
 }
