@@ -23,7 +23,7 @@ More details, documentation, and usage information will be added to the README a
 - [X] [Alert Dialog](/pkg/ui/alert_dialog.templ)
 - [X] [Avatar](/pkg/ui/avatar.templ)
 - [X] [Badge](/pkg/ui/badge.templ)
-- [ ] Breadcrumb
+- [X] [Breadcrumb](/pkg/ui/breadcrumb.templ)
 - [X] [Button](/pkg/ui/button.templ)
 - [ ] Calendar
 - [ ] Card

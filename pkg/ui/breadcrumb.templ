@@ -1,0 +1,167 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-templ-lucide/icons"
+import "github.com/dimmerz92/go-shadcn/pkg/lib"
+
+/* Breadcrumb-----------------------------------------------------------------*/
+type BreadcrumbProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// Breadcrumb displays the path to the current resource using a hierarchy of
+// links.
+templ Breadcrumb(props BreadcrumbProps) {
+	<nav
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("breadcrumb " + props.Class) }
+		aria-label="breadbrumb"
+		{ props.Attributes... }
+	>
+		<ol>
+			{ children... }
+		</ol>
+	</nav>
+}
+
+/* Breadcrumb Link------------------------------------------------------------*/
+
+// BreadcrumbLink displays a clickable URL part of the breadcrumb.
+templ BreadcrumbLink(href string) {
+	<li class="breadcrumb-link">
+		<a href={ templ.SafeURL(href) }>
+			{ children... }
+		</a>
+	</li>
+}
+
+/* Breadcrumb Page------------------------------------------------------------*/
+
+// BreadcrumbPage displays the current page in the breadcrumb.
+templ BreadcrumbPage() {
+	<li class="breadcrumb-page">
+		{ children... }
+	</li>
+}
+
+/* Breadcrumb Separator-------------------------------------------------------*/
+
+// BreadcrumbSeparator displays the seperator beween `BreadcrumbLink`,
+// `BreadcrumbPage`, `BreadcrumbEllipsis`, and `BreadcrumbList` components.
+templ BreadcrumbSeparator(sep ...templ.Component) {
+	<li role="presentation" class="breadcrumb-separator" aria-hidden="true">
+		if len(sep) > 0 {
+			@sep[0]
+		} else {
+			@icons.ChevronRight()
+		}
+	</li>
+}
+
+/* Breadcrumb Ellipsis--------------------------------------------------------*/
+
+// BreadcrumbEllipsis displays a clickable ellipsis with a dropdown menu of
+// `BreadcrumbLink` components.
+templ BreadcrumbEllipsis() {
+	@breadcrumbDropdown("") {
+		{ children... }
+	}
+}
+
+/* Breadcrumb List------------------------------------------------------------*/
+
+// BreadcrumbList displays a clickable label with a dropdown menu of
+// `BreadcrumbLink` components.
+templ BreadcrumbList(label string) {
+	@breadcrumbDropdown(label) {
+		{ children... }
+	}
+}
+
+/* Breadcrumb Generator-------------------------------------------------------*/
+type BreadcrumbFromPathProps struct {
+	MaxDepth uint   // the number of paths to display, remaining collapsed in ellipsis.
+	Path     string // the relative path of the current location.
+	BreadcrumbProps
+}
+
+// BreadcrumbFromPath generates a breadcrumb component from a relative path.
+templ BreadcrumbFromPath(props BreadcrumbFromPathProps) {
+	// create slice from path string
+	{{ paths := strings.Split(strings.Trim(props.Path, "/"), "/") }}
+	@Breadcrumb(props.BreadcrumbProps) {
+		if int(props.MaxDepth) == 0 || len(paths) <= int(props.MaxDepth) {
+			for _, path := range paths[:len(paths)-1] {
+				@BreadcrumbLink("/" + path) {
+					{ strings.ToUpper(string(path[0])) + path[1:] }
+				}
+				@BreadcrumbSeparator()
+			}
+			@BreadcrumbPage() {
+				{ strings.ToUpper(string(paths[len(paths)-1][0])) + paths[len(paths)-1][1:] }
+			}
+		} else {
+			for _, path := range paths[:int(props.MaxDepth)-1] {
+				@BreadcrumbLink("/" + path) {
+					{ strings.ToUpper(string(path[0])) + path[1:] }
+				}
+				@BreadcrumbSeparator()
+			}
+			@BreadcrumbEllipsis() {
+				for _, path := range paths[int(props.MaxDepth)-1:len(paths)-1] {
+					@BreadcrumbLink("/" + path) {
+						{ strings.ToUpper(string(path[0])) + path[1:] }
+					}
+				}
+			}
+			@BreadcrumbSeparator()
+			@BreadcrumbPage() {
+				{ strings.ToUpper(string(paths[len(paths)-1][0])) + paths[len(paths)-1][1:] }
+			}
+		}
+	}
+}
+
+templ breadcrumbDropdown(label string) {
+	<li class={ lib.IIF(label != "", "breadcrumb-list", "breadcrumb-ellipsis") }>
+		@Button(ButtonProps{
+			Class: "link",
+			Attributes: templ.Attributes{
+				"aria-haspopup": "menu",
+				"aria-expanded": "false",
+			},
+		}) {
+			if label != "" {
+				{ label }
+				<span class="indicator">
+					@icons.ChevronDown()
+				</span>
+			} else {
+				@icons.Ellipsis()
+			}
+			<script>
+				((trigger) => {
+					trigger.addEventListener("click", function(e) {
+						if (this.ariaExpanded === "false") {
+							this.ariaExpanded = "true";
+							this.focus();
+						} else {
+							this.ariaExpanded = "false";
+							this.blur();
+						}
+					});
+					trigger.addEventListener("blur", function() {
+						this.ariaExpanded = "false";
+					})
+				})(document.currentScript.closest("button"));
+			</script>
+		}
+		<ol>
+			{ children... }
+		</ol>
+	</li>
+}
