@@ -1,0 +1,76 @@
+package ui
+
+import "strings"
+
+type CardProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+templ Card(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("card " + props.Class) }
+	>
+		{ children... }
+	</div>
+}
+
+templ CardHeader(props CardProps) {
+	<header
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("card-header " + props.Class) }
+	>
+		{ children... }
+	</header>
+}
+
+templ CardTitle(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("card-title " + props.Class) }
+	>
+		{ children... }
+	</div>
+}
+
+templ CardDescription(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("card-description " + props.Class) }
+	>
+		{ children... }
+	</div>
+}
+
+templ CardContent(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("card-content " + props.Class) }
+		class="card-content"
+	>
+		{ children... }
+	</div>
+}
+
+templ CardFooter(props CardProps) {
+	<footer
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("card-footer " + props.Class) }
+	>
+		{ children... }
+	</footer>
+}

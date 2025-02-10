@@ -15,7 +15,22 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Calendar(ui.CalendarProps{})
+			@ui.Card(ui.CardProps{}) {
+				@ui.CardHeader(ui.CardProps{}) {
+					@ui.CardTitle(ui.CardProps{}) {
+						Create Project
+					}
+					@ui.CardDescription(ui.CardProps{}) {
+						Deploy your new project in one-click
+					}
+				}
+				@ui.CardContent(ui.CardProps{}) {
+					Some content
+				}
+				@ui.CardFooter(ui.CardProps{}) {
+					some footer
+				}
+			}
 		</body>
 	</html>
 }
