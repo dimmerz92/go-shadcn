@@ -25,7 +25,7 @@ More details, documentation, and usage information will be added to the README a
 - [X] [Badge](/pkg/ui/badge.templ)
 - [X] [Breadcrumb](/pkg/ui/breadcrumb.templ)
 - [X] [Button](/pkg/ui/button.templ)
-- [ ] Calendar
+- [X] [Calendar](/pkg/ui/calendar.templ)
 - [ ] Card
 - [ ] Carousel
 - [ ] Chart

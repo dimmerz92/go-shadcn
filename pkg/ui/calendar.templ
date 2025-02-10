@@ -1,0 +1,240 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-templ-lucide/icons"
+
+type CalendarProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	templ.Attributes        // adds additional attributes.
+}
+
+// A date field component that allows users to enter and edit a date.
+//
+// Emits the following events:
+// - `.calendar`
+//    emits the "change" event with detail.date as a Date object representing
+//    the selected date and detail.trigger as the element that triggered the
+//    event.
+//
+// - `.calendar .calendar-display`
+//    emits the "change" event with detail as a Date object representing the
+//    current month and year to be displayed.
+templ Calendar(props CalendarProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("calendar " + props.Class) }
+		{ props.Attributes... }
+	>
+		<div class="calendar-controls">
+			@Button(ButtonProps{
+				Class:      "calendar-control outline secondary",
+				Attributes: templ.Attributes{"aria-label": "Previous month"},
+			}) {
+				@icons.ChevronLeft()
+				<script
+					if nonce := templ.GetNonce(ctx); nonce != "" {
+						nonce={ nonce }
+					}
+				>
+					((prev) => {
+						prev.addEventListener("click", () => {
+							const display = prev.nextElementSibling;
+							const currentDate = new Date(parseInt(display.getAttribute("data-month")));
+							const prevDate = new Date(
+								currentDate.getFullYear(),
+								currentDate.getMonth() - 1,
+							);
+							display.textContent = prevDate.toLocaleString(
+								"en-US",
+								{ month: "long", year: "numeric" },
+							);
+							display.setAttribute("data-month", prevDate.setHours(0, 0, 0, 0));
+							display.dispatchEvent(new CustomEvent("change",
+								{ detail: prevDate }
+							));
+						});
+					})(document.currentScript.closest(".calendar-control"));
+				</script>
+			}
+			<span class="calendar-display">
+				<script
+					if nonce := templ.GetNonce(ctx); nonce != "" {
+						nonce={ nonce }
+					}
+				>
+					((display) => {
+						const currentMonth = new Date();
+						currentMonth.setDate(1);
+						display.textContent = currentMonth.toLocaleString(
+							"en-US",
+							{ month: "long", year: "numeric" },
+						);
+						display.setAttribute("data-month", currentMonth.setHours(0, 0, 0 ,0));
+					})(document.currentScript.closest(".calendar-display"));
+				</script>
+			</span>
+			@Button(ButtonProps{
+				Class:      "calendar-control outline secondary",
+				Attributes: templ.Attributes{"aria-label": "Next month"},
+			}) {
+				@icons.ChevronRight()
+				<script
+					if nonce := templ.GetNonce(ctx); nonce != "" {
+						nonce={ nonce }
+					}
+				>
+					((next) => {
+						next.addEventListener("click", () => {
+							const display = next.previousElementSibling;
+							const currentDate = new Date(parseInt(display.getAttribute("data-month")));
+							const nextDate = new Date(
+								currentDate.getFullYear(),
+								currentDate.getMonth() + 1,
+							);
+							display.textContent = nextDate.toLocaleString(
+								"en-US",
+								{ month: "long", year: "numeric" },
+							);
+							display.setAttribute("data-month", nextDate.setHours(0, 0, 0, 0));
+							display.dispatchEvent(new CustomEvent("change",
+								{ detail: nextDate }
+							));
+						});
+					})(document.currentScript.closest(".calendar-control"));
+				</script>
+			}
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Su</th>
+					<th>Mo</th>
+					<th>Tu</th>
+					<th>We</th>
+					<th>Th</th>
+					<th>Fr</th>
+					<th>Sa</th>
+				</tr>
+			</thead>
+			<tbody class="calendar-body"></tbody>
+		</table>
+		@	calendarRenderer.Once() {
+			@renderCalendar()
+		}
+		<script
+			if nonce := templ.GetNonce(ctx); nonce != "" {
+				nonce={ nonce }
+			}
+		>
+			((calendar) => {
+				const display = calendar.querySelector(".calendar-display")
+				const calendarBody = calendar.querySelector(".calendar-body");
+				renderCalendar(display, calendarBody)
+				display.addEventListener("change", () => {
+					renderCalendar(display, calendarBody);
+				});
+			})(document.currentScript.closest(".calendar"));
+		</script>
+	</div>
+}
+
+var calendarRenderer = templ.NewOnceHandle()
+
+templ renderCalendar() {
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		function renderCalendar(display, calendarBody) {
+			calendarBody.innerHTML = "";
+			const selected = display.closest(".calendar").getAttribute("data-value");
+			const today = new Date(new Date().setHours(0, 0, 0, 0));
+			const displayMonth = new Date(
+				parseInt(display.getAttribute("data-month")
+			));
+			const dayOfWeek = displayMonth.getDay();
+			const daysInMonth = new Date(
+				displayMonth.getFullYear(),
+				displayMonth.getMonth() + 1,
+				0
+			).getDate();
+			const offset = dayOfWeek + daysInMonth;
+			const startOfCalendar = new Date(
+				displayMonth.getFullYear(),
+				displayMonth.getMonth(),
+				daysInMonth - offset + 1,
+			).getDate();
+
+			let date;
+			let count = 0;
+			for (let i = 0; i < Math.ceil(offset / 7); i++) {
+				const row = document.createElement("tr");
+
+				for (let j = 0; j < 7; j++) {
+					const cell = document.createElement("td");
+					if (count < dayOfWeek) {
+						date = new Date(
+							displayMonth.getFullYear(),
+							displayMonth.getMonth() - 1,
+							startOfCalendar + count++,
+						);
+						cell.classList.add("prev");
+					} else {
+						date = new Date(
+							displayMonth.getFullYear(),
+							displayMonth.getMonth(),
+							count++ - dayOfWeek + 1,
+						);
+						if (date.getMonth() > displayMonth.getMonth() ||
+							date.getFullYear() > displayMonth.getFullYear()
+						) {
+							cell.classList.add("next");
+						} else if (date.getTime() === today.getTime()) {
+							cell.classList.add("current");
+						}
+					}
+
+					cell.textContent = date.getDate();
+					cell.setAttribute(
+						"data-value",
+						date.toLocaleDateString("en-CA"),
+					);
+					
+					if (selected && cell.getAttribute("data-value") === selected) {
+						cell.classList.add("selected");
+					}
+
+					display.closest(".calendar").addEventListener("change", (e) => {
+						if (e.detail.trigger !== cell) {
+							cell.classList.remove("selected");
+						}
+					});
+
+					cell.onclick = function() {
+						this.classList.add("selected");
+
+						display.closest(".calendar").setAttribute(
+							"data-value",
+							this.getAttribute("data-value")
+						);
+
+						display.closest(".calendar").dispatchEvent(new CustomEvent(
+							"change", {
+								detail: {
+									value: date,
+									trigger: cell,
+								},
+							},
+						));
+					}
+					row.appendChild(cell);
+				}
+				calendarBody.appendChild(row);
+			}
+		}
+	</script>
+}

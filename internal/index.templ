@@ -15,47 +15,7 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Breadcrumb(ui.BreadcrumbProps{}) {
-				@ui.BreadcrumbLink("/") {
-					Home
-				}
-				@ui.BreadcrumbSeparator()
-				@ui.BreadcrumbEllipsis() {
-					@ui.BreadcrumbLink("/docs") {
-						Documentation
-					}
-					@ui.BreadcrumbLink("/themes") {
-						Themes
-					}
-					@ui.BreadcrumbLink("https://github.com/dimmerz92/go-shadcn") {
-						GitHub
-					}
-				}
-				@ui.BreadcrumbSeparator()
-				@ui.BreadcrumbList("Components") {
-					@ui.BreadcrumbLink("/docs") {
-						Documentation
-					}
-					@ui.BreadcrumbLink("/themes") {
-						Themes
-					}
-					@ui.BreadcrumbLink("https://github.com/dimmerz92/go-shadcn") {
-						GitHub
-					}
-				}
-				@ui.BreadcrumbSeparator()
-				@ui.BreadcrumbLink("/page1") {
-					Page 1
-				}
-				@ui.BreadcrumbSeparator()
-				@ui.BreadcrumbPage() {
-					Page 2
-				}
-			}
-			<br/>
-			@ui.BreadcrumbFromPath(ui.BreadcrumbFromPathProps{Path: "/path1/path2/path3/"})
-			<br/>
-			@ui.BreadcrumbFromPath(ui.BreadcrumbFromPathProps{Path: "/path1/path2/path3/path4/path5/path6/", MaxDepth: 3})
+			@ui.Calendar(ui.CalendarProps{})
 		</body>
 	</html>
 }
