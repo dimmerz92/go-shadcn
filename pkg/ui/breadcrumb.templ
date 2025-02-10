@@ -143,7 +143,11 @@ templ breadcrumbDropdown(label string) {
 			} else {
 				@icons.Ellipsis()
 			}
-			<script>
+			<script
+				if nonce := templ.GetNonce(ctx); nonce != "" {
+					nonce={ nonce }
+				}
+			>
 				((trigger) => {
 					trigger.addEventListener("click", function(e) {
 						if (this.ariaExpanded === "false") {

@@ -679,7 +679,30 @@ func breadcrumbDropdown(label string) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, " <script>\n\t\t\t\t((trigger) => {\n\t\t\t\t\ttrigger.addEventListener(\"click\", function(e) {\n\t\t\t\t\t\tif (this.ariaExpanded === \"false\") {\n\t\t\t\t\t\t\tthis.ariaExpanded = \"true\";\n\t\t\t\t\t\t\tthis.focus();\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\tthis.ariaExpanded = \"false\";\n\t\t\t\t\t\t\tthis.blur();\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\t\t\t\t\ttrigger.addEventListener(\"blur\", function() {\n\t\t\t\t\t\tthis.ariaExpanded = \"false\";\n\t\t\t\t\t})\n\t\t\t\t})(document.currentScript.closest(\"button\"));\n\t\t\t</script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, " <script")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if nonce := templ.GetNonce(ctx); nonce != "" {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, " nonce=\"")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var31 string
+				templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(nonce)
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/ui/breadcrumb.templ`, Line: 148, Col: 18}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "\"")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, ">\n\t\t\t\t((trigger) => {\n\t\t\t\t\ttrigger.addEventListener(\"click\", function(e) {\n\t\t\t\t\t\tif (this.ariaExpanded === \"false\") {\n\t\t\t\t\t\t\tthis.ariaExpanded = \"true\";\n\t\t\t\t\t\t\tthis.focus();\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\tthis.ariaExpanded = \"false\";\n\t\t\t\t\t\t\tthis.blur();\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\t\t\t\t\ttrigger.addEventListener(\"blur\", function() {\n\t\t\t\t\t\tthis.ariaExpanded = \"false\";\n\t\t\t\t\t})\n\t\t\t\t})(document.currentScript.closest(\"button\"));\n\t\t\t</script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -695,7 +718,7 @@ func breadcrumbDropdown(label string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "<ol>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<ol>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -703,7 +726,7 @@ func breadcrumbDropdown(label string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "</ol></li>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 30, "</ol></li>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
