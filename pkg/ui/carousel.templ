@@ -14,6 +14,12 @@ type CarouselProps struct {
 }
 
 // Carousel displays a responsive slider with clickable toggles.
+//
+// Emits the following events:
+// - `.carousel`
+//    emits the "change" event with detail.index as the index of the new item,
+//    detail.items as the number of items in the carousel, and detail.offset as
+//    the offset in pixels that the carousel slider is currently positioned.
 templ Carousel(props CarouselProps) {
 	<div
 		role="region"
