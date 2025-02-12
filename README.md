@@ -29,7 +29,7 @@ More details, documentation, and usage information will be added to the README a
 - [X] [Card](/pkg/ui/card.templ)
 - [X] [Carousel](/pkg/ui/carousel.templ)
 - [ ] Chart
-- [ ] Checkbox
+- [X] [Checkbox](/pkg/ui/checkbox.templ)
 - [ ] Collapsible
 - [ ] Combobox
 - [ ] Context Menu

@@ -1,0 +1,29 @@
+package ui
+
+import "strings"
+
+type CheckboxProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style attribute.
+	Name             string // specifies the name attribute.
+	Checked          bool   // checks the checkbox if true.
+	Disabled         bool   // disables the checkbox if true.
+	templ.Attributes        // adds additional attributes.
+}
+
+templ Checkbox(props CheckboxProps) {
+	<input
+		type="checkbox"
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("checkbox " + props.Class) }
+		if props.Name != "" {
+			name={ props.Name }
+		}
+		checked?={ props.Checked }
+		disabled?={ props.Disabled }
+		{ props.Attributes... }
+	/>
+}

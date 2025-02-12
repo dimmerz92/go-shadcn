@@ -1,0 +1,29 @@
+.checkbox {
+	appearance: none;
+	border: 1px solid hsl(var(--primary));
+	border-radius: calc(var(--radius) - 4px);
+	color: hsl(var(--primary-foreground));
+	cursor: pointer;
+	height: 1rem;
+	width: 1rem;
+}
+
+.checkbox:where(:checked, :indeterminate) {
+	background-color: hsl(var(--primary));
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 0.9rem;
+}
+
+.checkbox:checked {
+	background-image: var(--icon-check);
+}
+
+.checkbox:indeterminate {
+	background-image: var(--icon-minus);
+}
+
+.checkbox:disabled {
+	cursor: not-allowed;
+	opacity: 50%;
+}

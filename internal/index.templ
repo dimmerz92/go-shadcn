@@ -15,82 +15,10 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Carousel(ui.CarouselProps{}) {
-				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{Style: "height: 320px"}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content1</div>
-							}
-						}
-					</div>
-				}
-				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{Style: "height: 380px"}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content2</div>
-							}
-						}
-					</div>
-				}
-				@ui.CarouselItem(ui.CarouselItemProps{}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content3</div>
-							}
-						}
-					</div>
-				}
-				@ui.CarouselItem(ui.CarouselItemProps{}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content4</div>
-							}
-						}
-					</div>
-				}
-			}
-			@ui.Carousel(ui.CarouselProps{Vertical: true}) {
-				@ui.CarouselItem(ui.CarouselItemProps{Style: "width: 320px"}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content1</div>
-							}
-						}
-					</div>
-				}
-				@ui.CarouselItem(ui.CarouselItemProps{Style: "width: 380px"}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content2</div>
-							}
-						}
-					</div>
-				}
-				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content3</div>
-							}
-						}
-					</div>
-				}
-				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
-					<div style="padding: 0.25rem">
-						@ui.Card(ui.CardProps{}) {
-							@ui.CardContent(ui.CardProps{}) {
-								<div>content4</div>
-							}
-						}
-					</div>
-				}
-			}
+			@ui.Checkbox(ui.CheckboxProps{})
+			@ui.Checkbox(ui.CheckboxProps{Disabled: true})
+			@ui.Checkbox(ui.CheckboxProps{Checked: true})
+			@ui.Checkbox(ui.CheckboxProps{Checked: true, Disabled: true})
 		</body>
 	</html>
 }
