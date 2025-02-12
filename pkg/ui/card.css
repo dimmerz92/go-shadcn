@@ -1,4 +1,6 @@
 .card {
+	display: grid;
+	gap: 1.5rem;
 	background-color: hsl(var(--card));
 	border: 1px solid hsl(var(--border));
 	border-radius: calc(var(--radius) + 4px);
@@ -7,13 +9,12 @@
 		0 1px 3px 0 rgba(0, 0, 0, 0.1),
 		0 1px 2px -1px rgba(0, 0, 0, 0.1);
 	color: hsl(var(--card-foreground));
-	width: 350px;
+	padding: 1.5rem;
 }
 
 .card-header {
 	display: grid;
 	gap: 0.3125rem;
-	padding: 1.5rem;
 }
 
 .card-title {
@@ -25,12 +26,4 @@
 	color: hsl(var(--muted-foreground));
 	font-size: 0.875rem;
 	line-height: 1.25rem;
-}
-
-.card-content {
-	padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-.card-footer {
-	padding: 0 1.5rem 1.5rem 1.5rem;
 }

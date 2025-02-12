@@ -7,6 +7,7 @@ type ButtonProps struct {
 	Type             string // specifies the type attribute, defaults to button.
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
@@ -20,6 +21,9 @@ templ Button(props ButtonProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("button " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		{ props.Attributes... }
 	>
 		{ children... }

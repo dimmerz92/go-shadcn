@@ -7,6 +7,7 @@ import "github.com/dimmerz92/go-shadcn/pkg/lib"
 type AlertDialogProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
@@ -19,6 +20,9 @@ templ AlertDialog(props AlertDialogProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("alert-dialog " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		{ props.Attributes... }
 	>
 		{ children... }
@@ -65,6 +69,7 @@ templ AlertDialogTrigger(props AlertDialogTriggerProps) {
 type AlertDialogHeaderProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
@@ -75,6 +80,9 @@ templ AlertDialogHeader(props AlertDialogHeaderProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("alert-dialog-header " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 	>
 		<h2>
 			{ children... }
@@ -86,16 +94,20 @@ templ AlertDialogHeader(props AlertDialogHeaderProps) {
 type AlertDialogContentProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
 // AlertDialogContent displays the body content of the opened alert dialog.
-templ AlertDialogContent(props AlertDialogFooterProps) {
+templ AlertDialogContent(props AlertDialogContentProps) {
 	<div
 		if props.ID != "" {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("alert-dialog-content " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 	>
 		{ children... }
 	</div>
@@ -105,6 +117,7 @@ templ AlertDialogContent(props AlertDialogFooterProps) {
 type AlertDialogFooterProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
@@ -115,6 +128,9 @@ templ AlertDialogFooter(props AlertDialogFooterProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("alert-dialog-footer " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 	>
 		{ children... }
 	</footer>

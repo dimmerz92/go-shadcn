@@ -5,6 +5,7 @@ import "strings"
 type BadgeProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
@@ -17,6 +18,9 @@ templ Badge(props BadgeProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("badge " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		{ props.Attributes... }
 	>
 		{ children... }

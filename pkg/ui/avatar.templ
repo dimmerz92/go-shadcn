@@ -5,6 +5,7 @@ import "strings"
 type AvatarProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	Src              string // URI for the image.
 	Alt              string // image alt text.
 	Fallback         string // fallback text if the image fails to load, fits 3 characters.
@@ -18,6 +19,9 @@ templ Avatar(props AvatarProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("avatar " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		data-fallback={ props.Fallback }
 	>
 		<img src={ props.Src } alt={ props.Alt }/>

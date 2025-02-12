@@ -5,10 +5,11 @@ import "github.com/dimmerz92/go-shadcn/pkg/lib"
 
 /* Accordion------------------------------------------------------------------*/
 type AccordionProps struct {
-	ID               string // specifies the <section> id attribute.
-	Class            string // adds classes to the <section>.
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style class.
 	Animate          bool   // turns accordion animations on, defaults to off.
-	templ.Attributes        // adds additional attributes to the <section>.
+	templ.Attributes        // adds additional attributes.
 }
 
 // Accordion provides a parent context for all accordion items to be placed.
@@ -23,10 +24,16 @@ templ Accordion(props AccordionProps) {
 		if props.ID != "" {
 			id={ props.ID }
 		}
-		class={ strings.TrimSpace(
-			"accordion " +
-			lib.IIF(props.Animate, "animate ", "") +
-			props.Class) }
+		class={
+			strings.TrimSpace(
+				"accordion " +
+					lib.IIF(props.Animate, "animate ", "") +
+					props.Class,
+			),
+		}
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		data-ctx={ lib.GenerateUniqueString(8) }
 	>
 		{ children... }
@@ -95,9 +102,10 @@ templ toggleAccordion() {
 
 /* Accordion Item-------------------------------------------------------------*/
 type AccordionItemProps struct {
-	ID               string // specifies the <details> id attribute.
-	Class            string // adds classes to the <details>.
-	templ.Attributes        // adds additional attributes to the <details>.
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style class.
+	templ.Attributes        // adds additional attributes.
 }
 
 // AccordionItem displays a single togglable accordion item.
@@ -107,6 +115,9 @@ templ AccordionItem(props AccordionItemProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("accordion-item " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		{ props.Attributes... }
 	>
 		{ children... }
@@ -115,9 +126,10 @@ templ AccordionItem(props AccordionItemProps) {
 
 /* Accordion Trigger----------------------------------------------------------*/
 type AccordionTriggerProps struct {
-	ID               string // specifies the <details> id attribute.
-	Class            string // adds classes to the <details>.
-	templ.Attributes        // adds additional attributes to the <details>.
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style class.
+	templ.Attributes        // adds additional attributes.
 }
 
 // AccordionTrigger displays the trigger to open and close the accordion item.
@@ -127,6 +139,9 @@ templ AccordionTrigger(props AccordionTriggerProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("accordion-trigger " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		{ props.Attributes... }
 	>
 		{ children... }
@@ -135,9 +150,10 @@ templ AccordionTrigger(props AccordionTriggerProps) {
 
 /* Accordion Content----------------------------------------------------------*/
 type AccordionContentProps struct {
-	ID               string // specifies the <details> id attribute.
-	Class            string // adds classes to the <details>.
-	templ.Attributes        // adds additional attributes to the <details>.
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style class.
+	templ.Attributes        // adds additional attributes.
 }
 
 // AccordionContent displays the toggled content of the accordion item.
@@ -147,6 +163,9 @@ templ AccordionContent(props AccordionContentProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("accordion-content " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		{ props.Attributes... }
 	>
 		{ children... }

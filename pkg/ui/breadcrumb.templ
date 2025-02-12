@@ -8,6 +8,7 @@ import "github.com/dimmerz92/go-shadcn/pkg/lib"
 type BreadcrumbProps struct {
 	ID               string // specifies the id attribute.
 	Class            string // adds classes.
+	Style            string // specifies the style attribute.
 	templ.Attributes        // adds additional attributes.
 }
 
@@ -19,6 +20,9 @@ templ Breadcrumb(props BreadcrumbProps) {
 			id={ props.ID }
 		}
 		class={ strings.TrimSpace("breadcrumb " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
 		aria-label="breadbrumb"
 		{ props.Attributes... }
 	>
