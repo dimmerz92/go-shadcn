@@ -1,0 +1,156 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-shadcn/pkg/lib"
+import "github.com/dimmerz92/go-templ-lucide/icons"
+
+/* Carousel-------------------------------------------------------------------*/
+type CarouselProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style attribute.
+	Vertical         bool   // sets the scroll direction to vertical.
+	templ.Attributes        // adds additional attributes.
+}
+
+// Carousel displays a responsive slider with clickable toggles.
+templ Carousel(props CarouselProps) {
+	<div
+		role="region"
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={
+			strings.TrimSpace(
+				"carousel " +
+					lib.IIF(props.Vertical, "vertical ", "horizontal ") +
+					props.Class,
+			),
+		}
+		if props.Style != "" {
+			style={ props.Style }
+		}
+		aria-roledescription="carousel"
+		data-index="0"
+		{ props.Attributes... }
+	>
+		@Button(ButtonProps{Class: "outline secondary carousel-button prev"}) {
+			@icons.ArrowLeft()
+		}
+		<script
+			if nonce := templ.GetNonce(ctx); nonce != "" {
+				nonce={ nonce }
+			}
+		>
+			((prev) => prev.addEventListener("click", () => {
+				moveCarousel(prev.closest(".carousel"), -1);
+			}))(document.currentScript.previousElementSibling);
+		</script>
+		<div class="carousel-content">
+			<div class="carousel-slider">
+				{ children... }
+			</div>
+		</div>
+		@Button(ButtonProps{Class: "outline secondary carousel-button next"}) {
+			@icons.ArrowRight()
+		}
+		<script
+			if nonce := templ.GetNonce(ctx); nonce != "" {
+				nonce={ nonce }
+			}
+		>
+			((next) => next.addEventListener("click", () => {
+				moveCarousel(next.closest(".carousel"), 1);
+			}))(document.currentScript.previousElementSibling);
+		</script>
+		@carouselMover.Once() {
+			@moveCarousel()
+		}
+	</div>
+}
+
+var carouselMover = templ.NewOnceHandle()
+
+templ moveCarousel() {
+	<script
+		if nonce := templ.GetNonce(ctx); nonce != "" {
+			nonce={ nonce }
+		}
+	>
+		function moveCarousel(carousel, direction) {
+			const slider = carousel.querySelector(".carousel-slider");
+			let index = parseInt(carousel.getAttribute("data-index"));
+			let length = slider.children.length;
+			let offset = 0;
+
+			if (direction < 0 && index > 0) {
+				if (carousel.classList.contains("horizontal")) {
+					for (let i = 0; i < index - 1; i++) {
+						offset += slider.children[i].offsetWidth;
+					}
+					slider.style.transform = `translateX(${-offset}px)`;
+				} else {
+					for (let i = 0; i < index - 1; i++) {
+						offset += slider.children[i].offsetHeight;
+					}
+					slider.style.transform = `translateY(${-offset}px)`;
+				}
+				index--;
+				carousel.dispatchEvent(new CustomEvent("change", {
+					detail: {
+						index: index,
+						items: length,
+						offset: offset,
+					},
+				}));
+			} else if (direction > 0 && index < length - 1) {
+				if (carousel.classList.contains("horizontal")) {
+					for (let i = 0; i <= index; i++) {
+						offset += slider.children[i].offsetWidth;
+					}
+					slider.style.transform = `translateX(${-offset}px)`
+				} else {
+					for (let i = 0; i <= index; i++) {
+						offset += slider.children[i].offsetHeight;
+					}
+					slider.style.transform = `translateY(${-offset}px)`
+				}
+				index++;
+				carousel.dispatchEvent(new CustomEvent("change", {
+					detail: {
+						index: index,
+						items: length,
+						offset: offset,
+					},
+				}));
+			}
+			carousel.setAttribute("data-index", index);
+		}
+	</script>
+}
+
+/* Carousel Item--------------------------------------------------------------*/
+type CarouselItemProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style attribute.
+	templ.Attributes        // adds additional attributes.
+}
+
+// CarouselItem displays an item of the Carousel.
+templ CarouselItem(props CarouselItemProps) {
+	<div
+		role="group"
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("carousel-item " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
+		aria-roledescription="slide"
+		{ props.Attributes... }
+	>
+		{ children... }
+	</div>
+}

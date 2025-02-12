@@ -15,20 +15,80 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Card(ui.CardProps{}) {
-				@ui.CardHeader(ui.CardProps{}) {
-					@ui.CardTitle(ui.CardProps{}) {
-						Create Project
-					}
-					@ui.CardDescription(ui.CardProps{}) {
-						Deploy your new project in one-click
-					}
+			@ui.Carousel(ui.CarouselProps{}) {
+				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{Style: "height: 320px"}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content1</div>
+							}
+						}
+					</div>
 				}
-				@ui.CardContent(ui.CardProps{}) {
-					Some content
+				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{Style: "height: 380px"}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content2</div>
+							}
+						}
+					</div>
 				}
-				@ui.CardFooter(ui.CardProps{}) {
-					some footer
+				@ui.CarouselItem(ui.CarouselItemProps{}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content3</div>
+							}
+						}
+					</div>
+				}
+				@ui.CarouselItem(ui.CarouselItemProps{}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content4</div>
+							}
+						}
+					</div>
+				}
+			}
+			@ui.Carousel(ui.CarouselProps{Vertical: true}) {
+				@ui.CarouselItem(ui.CarouselItemProps{Style: "width: 320px"}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content1</div>
+							}
+						}
+					</div>
+				}
+				@ui.CarouselItem(ui.CarouselItemProps{Style: "width: 380px"}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content2</div>
+							}
+						}
+					</div>
+				}
+				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content3</div>
+							}
+						}
+					</div>
+				}
+				@ui.CarouselItem(ui.CarouselItemProps{Style: "flex-basis: 50%"}) {
+					<div style="padding: 0.25rem">
+						@ui.Card(ui.CardProps{}) {
+							@ui.CardContent(ui.CardProps{}) {
+								<div>content4</div>
+							}
+						}
+					</div>
 				}
 			}
 		</body>

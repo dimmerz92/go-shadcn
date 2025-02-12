@@ -26,8 +26,8 @@ More details, documentation, and usage information will be added to the README a
 - [X] [Breadcrumb](/pkg/ui/breadcrumb.templ)
 - [X] [Button](/pkg/ui/button.templ)
 - [X] [Calendar](/pkg/ui/calendar.templ)
-- [X] [Card](/pkg/ui.card.templ)
-- [ ] Carousel
+- [X] [Card](/pkg/ui/card.templ)
+- [X] [Carousel](/pkg/ui/carousel.templ)
 - [ ] Chart
 - [ ] Checkbox
 - [ ] Collapsible
