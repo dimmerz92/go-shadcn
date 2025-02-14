@@ -114,7 +114,7 @@ func Calendar(props CalendarProps) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = icons.ChevronLeft().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icons.ChevronLeft(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -193,7 +193,7 @@ func Calendar(props CalendarProps) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = icons.ChevronRight().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icons.ChevronRight(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

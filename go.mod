@@ -4,5 +4,5 @@ go 1.23.5
 
 require (
 	github.com/a-h/templ v0.3.833
-	github.com/dimmerz92/go-templ-lucide v0.2.0
+	github.com/dimmerz92/go-templ-lucide v0.3.0
 )

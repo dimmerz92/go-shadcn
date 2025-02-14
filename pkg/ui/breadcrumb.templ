@@ -61,7 +61,7 @@ templ BreadcrumbSeparator(sep ...templ.Component) {
 		if len(sep) > 0 {
 			@sep[0]
 		} else {
-			@icons.ChevronRight()
+			@icons.ChevronRight(icons.IconProps{})
 		}
 	</li>
 }
@@ -142,10 +142,10 @@ templ breadcrumbDropdown(label string) {
 			if label != "" {
 				{ label }
 				<span class="indicator">
-					@icons.ChevronDown()
+					@icons.ChevronDown(icons.IconProps{})
 				</span>
 			} else {
-				@icons.Ellipsis()
+				@icons.Ellipsis(icons.IconProps{})
 			}
 			<script
 				if nonce := templ.GetNonce(ctx); nonce != "" {

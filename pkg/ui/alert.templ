@@ -26,7 +26,7 @@ templ Alert(props AlertProps) {
 			if props.Icon != nil {
 				@props.Icon
 			} else {
-				@icons.Info()
+				@icons.Info(icons.IconProps{})
 			}
 		</span>
 		<h5 class="alert-header">{ props.Header }</h5>

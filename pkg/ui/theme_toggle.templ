@@ -19,14 +19,14 @@ templ ThemeToggle(props *ThemeToggleProps) {
 	>
 		<span class="light">
 			if props == nil || props.IconLight == nil {
-				@icons.Sun()
+				@icons.Sun(icons.IconProps{})
 			} else {
 				@props.IconLight
 			}
 		</span>
 		<span class="dark">
 			if props == nil || props.IconDark == nil {
-				@icons.Moon()
+				@icons.Moon(icons.IconProps{})
 			} else {
 				@props.IconDark
 			}

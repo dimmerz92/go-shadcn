@@ -41,7 +41,7 @@ templ Carousel(props CarouselProps) {
 		{ props.Attributes... }
 	>
 		@Button(ButtonProps{Class: "outline secondary carousel-button prev"}) {
-			@icons.ArrowLeft()
+			@icons.ArrowLeft(icons.IconProps{})
 		}
 		<script
 			if nonce := templ.GetNonce(ctx); nonce != "" {
@@ -58,7 +58,7 @@ templ Carousel(props CarouselProps) {
 			</div>
 		</div>
 		@Button(ButtonProps{Class: "outline secondary carousel-button next"}) {
-			@icons.ArrowRight()
+			@icons.ArrowRight(icons.IconProps{})
 		}
 		<script
 			if nonce := templ.GetNonce(ctx); nonce != "" {

@@ -33,7 +33,7 @@ templ Calendar(props CalendarProps) {
 				Class:      "calendar-control outline secondary",
 				Attributes: templ.Attributes{"aria-label": "Previous month"},
 			}) {
-				@icons.ChevronLeft()
+				@icons.ChevronLeft(icons.IconProps{})
 				<script
 					if nonce := templ.GetNonce(ctx); nonce != "" {
 						nonce={ nonce }
@@ -80,7 +80,7 @@ templ Calendar(props CalendarProps) {
 				Class:      "calendar-control outline secondary",
 				Attributes: templ.Attributes{"aria-label": "Next month"},
 			}) {
-				@icons.ChevronRight()
+				@icons.ChevronRight(icons.IconProps{})
 				<script
 					if nonce := templ.GetNonce(ctx); nonce != "" {
 						nonce={ nonce }

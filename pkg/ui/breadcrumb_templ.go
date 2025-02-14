@@ -255,7 +255,7 @@ func BreadcrumbSeparator(sep ...templ.Component) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = icons.ChevronRight().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icons.ChevronRight(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -689,7 +689,7 @@ func breadcrumbDropdown(label string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = icons.ChevronDown().Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = icons.ChevronDown(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -698,7 +698,7 @@ func breadcrumbDropdown(label string) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			} else {
-				templ_7745c5c3_Err = icons.Ellipsis().Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = icons.Ellipsis(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

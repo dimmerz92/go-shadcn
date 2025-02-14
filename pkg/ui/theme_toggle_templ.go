@@ -45,7 +45,7 @@ func ThemeToggle(props *ThemeToggleProps) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if props == nil || props.IconLight == nil {
-			templ_7745c5c3_Err = icons.Sun().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icons.Sun(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -60,7 +60,7 @@ func ThemeToggle(props *ThemeToggleProps) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if props == nil || props.IconDark == nil {
-			templ_7745c5c3_Err = icons.Moon().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icons.Moon(icons.IconProps{}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
