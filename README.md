@@ -30,7 +30,7 @@ More details, documentation, and usage information will be added to the README a
 - [X] [Carousel](/pkg/ui/carousel.templ)
 - [ ] Chart
 - [X] [Checkbox](/pkg/ui/checkbox.templ)
-- [ ] Collapsible
+- [X] [Collapsible](/pkg/ui/collapsible.templ)
 - [ ] Combobox
 - [ ] Context Menu
 - [ ] Data Table

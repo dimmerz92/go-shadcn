@@ -1,0 +1,49 @@
+.collapsible {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	width: 350px;
+}
+
+.collapsible-trigger {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 600;
+	padding-inline: 1rem;
+}
+
+.collapsible-trigger > .collapsible-trigger-icon {
+	display: block;
+	border-radius: calc(var(--radius) - 2px);
+	cursor: pointer;
+	user-select: none;
+	height: 1rem;
+	width: 1rem;
+	padding: 0.5rem 0.75rem;
+}
+
+.collapsible-trigger > .collapsible-trigger-icon:hover {
+	background-color: hsl(var(--secondary));
+}
+
+.collapsible-trigger > .collapsible-trigger-icon:active {
+	background-color: color-mix(in hsl, hsl(var(--secondary)), transparent 10%);
+}
+
+.collapsible-trigger > .collapsible-trigger-icon > svg {
+	height: 100%;
+	width: 100%;
+}
+
+.collapsible-trigger > .collapsible-trigger-icon > input {
+	display: none;
+}
+
+.collapsible > .collapsible-content {
+	display: none;
+	margin-top: 0.5rem;
+}
+
+.collapsible-trigger:has(> .collapsible-trigger-icon > input:checked) ~ .collapsible-content {
+	display: block;
+}

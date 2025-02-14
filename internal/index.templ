@@ -15,10 +15,22 @@ templ Index() {
 		<body>
 			@ui.ThemeToggle(nil)
 			<br/>
-			@ui.Checkbox(ui.CheckboxProps{})
-			@ui.Checkbox(ui.CheckboxProps{Disabled: true})
-			@ui.Checkbox(ui.CheckboxProps{Checked: true})
-			@ui.Checkbox(ui.CheckboxProps{Checked: true, Disabled: true})
+			@ui.Collapsible(ui.CollabsipleProps{}) {
+				@ui.CollapsibleTrigger() {
+					{ `@peduarte starred 3 repositories` }
+				}
+				<div style="border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) - 2px); padding: 0.5rem 0.75rem; margin-top: 0.5rem">
+					{ `@radix-ui/primitives` }
+				</div>
+				@ui.CollapsibleContent() {
+					<div style="border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) - 2px); padding: 0.5rem 0.75rem; margin-top: 0.5rem">
+						{ `@radix-ui/colors` }
+					</div>
+					<div style="border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) - 2px); padding: 0.5rem 0.75rem; margin-top: 0.5rem">
+						{ `@radix-ui/react` }
+					</div>
+				}
+			}
 		</body>
 	</html>
 }

@@ -1,0 +1,47 @@
+package ui
+
+import "strings"
+import "github.com/dimmerz92/go-templ-lucide/icons"
+
+type CollabsipleProps struct {
+	ID               string // specifies the id attribute.
+	Class            string // adds classes.
+	Style            string // specifies the style attribute.
+	Collapsed        bool   // renders the collapsible as closed if true.
+	templ.Attributes        // adds additional attributes.
+}
+
+// displays an interactive component which expands/collapses a panel.
+templ Collapsible(props CollabsipleProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ strings.TrimSpace("collapsible " + props.Class) }
+		if props.Style != "" {
+			style={ props.Style }
+		}
+		open?={ !props.Collapsed }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
+// CollapsibleTrigger displays the trigger to open and close the collapsible.
+templ CollapsibleTrigger() {
+	<div class="collapsible-trigger">
+		{ children... }
+		<label role="button" class="collapsible-trigger-icon">
+			@icons.ChevronsUpDown(icons.IconProps{})
+			<input type="checkbox"/>
+		</label>
+	</div>
+}
+
+// CollapsibleContent displays the toggled content of the collapsible.
+templ CollapsibleContent() {
+	<div class="collapsible-content">
+		{ children... }
+	</div>
+}
